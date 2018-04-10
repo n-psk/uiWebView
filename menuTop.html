@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="onsenui/css/onsen-css-components.min.css">
+    <script src="./onsenui/js/onsenui.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="./bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="./ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="./script.js"></script>
+</head>
+
+<body>
+    <ons-page id="topBar">
+        <ons-toolbar>
+            <div class="center row">
+                <div class="col-6" id="numberProduct" style="text-align: center;">0 ชิ้น</div>
+                <div class="col-6" id="priceProduct" style="text-align: center;">0 บาท</div>
+            </div>
+        </ons-toolbar>
+    </ons-page>
+
+    <ons-page id="topBarBotton">
+        <ons-toolbar style="margin-top: 45px; padding-bottom: 70px;">
+            <div class="center row" style="margin-top: 2%;">
+                <div class="col-6" style="text-align: center;">จำนวน</div>
+                <div class="col-6" style="text-align: center; padding: 7px;">
+                    <div class="input-group" style="width: 100px; margin-left: 40%;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" onclick="reduce()">-</span>
+                            </div>
+                            <input id="numberValue" type="number" step="1" value="0" placeholder="" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" onclick="addUp()">+</span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </ons-toolbar>
+    </ons-page>
+
+    <script>page1()</script>
+</body>
+
+</html>

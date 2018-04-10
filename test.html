@@ -1,0 +1,36 @@
+<!DOCTYPE html >
+<html>
+
+<head>
+    <title>Untitled Page</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+    <script type="text/javascript">
+        function TodoCtrl($scope) {
+            $scope.total = function () {
+                return $scope.x - $scope.y;
+            };
+
+        }
+    </script>
+</head>
+
+<body>
+    <div ng-app>
+        <h2>Calculate</h2>
+
+        <div ng-controller="TodoCtrl">
+            <form>
+                <li>Number 1:
+                    <input type="text" ng-model="x" /> </li>
+                <li>Number 2:
+                    <input type="text" ng-model="y" /> </li>
+                <li>Total
+                    <input type="text" value="{{total()}}" />
+                </li>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
