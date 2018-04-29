@@ -1,325 +1,163 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <title>Document</title> -->
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 16px 0px -21px 0px;
-            padding: 0;
-            overflow: hidden;
-            background-color: rgb(255, 255, 255);
-        }
+    <link rel="stylesheet" href="./library/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="./library/onsenui/css/onsen-css-components.min.css">
+    <script src="./library/onsenui/js/onsenui.min.js"></script>
+    <link rel="stylesheet" href="./library/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./library/fontawesome/web-fonts-with-css/css/fontawesome-all.css">
+    <script src="./library/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./library/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/calculation/process.js"></script>
+    <!-- <script src="./js/camera/settings.js"></script> -->
+    <script src="./js/UI/controls.js"></script>
+    <script src="./js/camera/barcode.js"></script>
 
-        .li-left {
-
-            margin-right: 10%;
-            margin-left: 18%;
-            float: left;
-        }
-
-        .li-right {
-            margin-right: 18%;
-            margin-left: 10%;
-            float: right;
-        }
-
-        li a {
-            display: block;
-            color: rgb(27, 27, 27);
-            text-align: center;
-            padding: 13px 16px;
-            text-decoration: none;
-        }
-
-        hr {
-            border-bottom-color: rgb(241, 101, 101)
-        }
-
-        .navbarBotton {
-            overflow: hidden;
-            background-color: rgb(255, 255, 255);
-            position: fixed;
-            bottom: 10px;
-            height: 55px;
-            margin: -10px 0;
-            width: 96%;
-        }
-
-        .navbarBottonTop {
-            overflow: hidden;
-            background-color: rgb(255, 255, 255);
-            position: fixed;
-            bottom: 15px;
-            width: 96%;
-            height: 55px;
-            margin-bottom: 25px
-        }
-
-        .navbarBotton a {
-            display: block;
-            color: #2b2b2b;
-            text-align: center;
-            text-decoration: none;
-            font-size: 17px;
-
-
-        }
-
-
-        .navbarBottonTop a {
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            font-size: 20px;
-
-
-        }
-
-        .navbarBottonTop-left {
-            float: left;
-            width: 50%;
-
-        }
-
-        .navbarBottonTop-right {
-            float: right;
-            width: 50%;
-        }
-
-        .navbarBotton-left {
-            float: left;
-            width: 50%;
-
-        }
-
-        .navbarBotton-right {
-            float: right;
-            width: 50%;
-        }
-
-        .navbarBotton-btn {
-            padding: 0% 40%;
-        }
-
-        .navbarBottonTop-btn {
-            padding: 0% 0% 0% 0%;
-            width: 50%;
-        }
-
-        .btnPayment {
-            background-color: brown;
-            color: rgb(218, 218, 218);
-            width: 125px;
-            border-radius: 12px
-        }
-
-        .input-group {
-            position: relative;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            -webkit-box-align: stretch;
-            -ms-flex-align: stretch;
-            align-items: stretch;
-            width: 100%;
-        }
-
-        .input-group-text {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            padding: .375rem .75rem;
-            margin-bottom: 0;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            text-align: center;
-            white-space: nowrap;
-            background-color: #e9ecef;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-        }
-
-        .form-control {
-            display: block;
-            width: 20px;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-        }
-
-        .center-from {
-
-            margin: 13% 10%;
-        }
-
-
-
-        .button {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            margin: 0 auto;
-            font-size: 52px;
-            -webkit-transition: all 0.4s ease-in;
-            transition: all 0.4s ease-in;
-        }
-
-
-
-        .button:before {
-            content: "";
-            background-color: aliceblue;
-            border-radius: 50%;
-            display: block;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            -webkit-transform: scale(0.001, 0.001);
-            transform: scale(0.001, 0.001);
-
-        }
-
-        .button:focus {
-            outline: 0;
-            color: #fff;
-        }
-
-        .button:focus:before {
-            -webkit-animation: effect_dylan 0.8s ease-out;
-            animation: effect_dylan 0.8s ease-out;
-        }
-    </style>
 </head>
 
 <body>
+    <ons-navigator swipeable id="myNavigator" page="Home.html"></ons-navigator>
+    <template id="Home.html">
 
-    <ul>
-        <li class="li-left">
-            <center>
-                <h2>0 ชิ้น</h2>
-            </center>
-        </li>
-        <li class="li-right">
-            <center>
-                <h2>0 บาท</h2>
-            </center>
-        </li>
-    </ul>
+        <ons-page id="home">
 
-    <div>
-        <div>
-            <hr>
-        </div>
-        <div style="width: 100%; float: left;">
-            <span style="float: right; margin: -11px 15% -14px">
-                <h3>0 บาท</h3>
-            </span>
-        </div>
-    </div>
+            <ons-toolbar>
+                <div class="center row">
+                    <div class="col-6" id="numberProduct" style="text-align: center;">0 ชิ้น</div>
+                    <div class="col-6" id="priceProduct" style="text-align: center;">0 บาท</div>
+                    <script>topBar()</script>
+                </div>
+            </ons-toolbar>
+            <ons-toolbar style="margin-top: 45px; padding-bottom: 70px;">
+                <div class="center row" style="margin-top: 2%;">
+                    <div class="col-6" style="text-align: center;">จำนวน</div>
+                    <div class="col-6" style="text-align: center; padding: 7px;">
+                        <div class="input-group" style="width: 100px; margin-left: 40%;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" onclick="reduce()">-</span>
+                            </div>
+                            <input id="numberValue" type="number" step="1" value="0" placeholder="" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" onclick="addUp()">+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>topBar()</script>
+            </ons-toolbar>
+            <ons-toolbar style="top: 115px; height: 415px;">
 
-    <div style="width: 100%;">
-        <h2 style="float: left; margin: 0 10%; ">จำนวน</h2>
-        <div style="float: right; margin: 0 10% 0 0;">
-            <div class="input-group">
-                <button class="input-group-text">-</button>
-                <input value="0" type="number" class="form-control">
-                <button class="input-group-text">+</button>
+                <script>
+                    
+                </script>
 
+                <div id="camera">
+                    <div class="select" style="position: absolute; z-index: 1;right: 10px; top: 10px;">
+                        <i class="fas fa-camera">
+                            <select id="videoSource"></select>
+                        </i>
+                    </div>
+                    <video id="barcodevideo" autoplay style="width: 100%; top: 0; position: absolute; z-index: 0;"></video>
+                    <canvas id="barcodecanvasg" style="width: 100%; top: -5%; position: absolute; z-index: 0;"></canvas>
+                    <div class="code_number" style="position: absolute; z-index: 1; left: 10px; top: 0; ">
+                        <canvas id="barcodecanvas"></canvas>
+                        <div id="result"></div>
+                    </div>
+                    <div class="loading" style="position: absolute; z-index: 2; left: 10px; top: 215px; ">
+                    </div>
+                </div>
+                <device type="media" onchange="update(this.data)"></device>
+
+                </div>
+            </ons-toolbar>
+
+            <ons-toolbar style="top: 83%; height: 11%; ">
+                <div class="center row" style="margin-top: 5%; height: 90%;">
+                    <p class="col-6" style="text-align: center; bottom: 10px">
+                        <ons-button id="description-button" modifier="quiet" style="text-align: center;">รายละเอียด</ons-button>
+                    </p>
+                    <p class="col-6" style="text-align: center; bottom:10px;">
+                        <ons-button onclick="createAlertPayment()" style="text-align: center; font-size: 24px;">ชำระเงิน</ons-button>
+                    </p>
+                </div>
+
+            </ons-toolbar>
+            <ons-toolbar style="top: 94%; height: 40px; position: fixed; bottom: 0;">
+                <div class="center row">
+                    <ons-button modifier="quiet" class="col-4" style="text-align: center;">สินค้า</ons-button>
+                    <ons-button modifier="quiet" class="col-4" style="text-align: center;">ขาย</ons-button>
+                    <ons-button modifier="quiet" class="col-4" style="text-align: center;">บัญชี</ons-button>
+                </div>
+            </ons-toolbar>
+
+        </ons-page>
+
+    </template>
+
+
+    <template id="description.html">
+        <ons-page id="description">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>Home</ons-back-button>
+                </div>
+                <div class="center"></div>
+            </ons-toolbar>
+            <ons-list>
+                <ons-lazy-repeat id="infinite-list">
+                    <script>Description()</script>
+                </ons-lazy-repeat>
+            </ons-list>
+        </ons-page>
+    </template>
+
+    <template id="alertPayment.html">
+
+        <ons-alert-dialog id="alertPayment" modifier="rowfooter">
+            <script>alertPayment()</script>
+            <div class="row" style="padding: 10px 15px;">
+                <div class="col-6">ยอดรวมชำระ</div>
+                <div class="col-6">
+                    <center id="totalPriceProduct"> 0 บาท</center>
+                </div>
             </div>
-        </div>
-    </div>
-    <div>
-        <device type="media" onchange="update(this.data)"></device>
-        <video autoplay style="width: 100%;  margin: auto; padding: 40px 0% 0% ;" ></video>
-        <script>
-            function update(stream) {
-                document.querySelector('video').src = stream.url;
-            }
-            function hasGetUserMedia() {
-                return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-            }
 
-            if (hasGetUserMedia()) {
-                // Good to go!
-            } else {
-                alert('getUserMedia() is not supported by your browser');
-            }
-            const constraints = {
-                video: true
-            };
-
-            const video = document.querySelector('video');
-
-            function handleSuccess(stream) {
-                video.srcObject = stream;
-            }
-
-            function handleError(error) {
-                console.error('Reeeejected!', error);
-            }
-            var hdConstraints = {
-                video: { width: { min: 1280 }, height: { min: 720 } }
-            };
-
-            navigator.mediaDevices.getUserMedia(constraints).
-                then(handleSuccess).catch(handleError);
+            <div class="row " style="padding: 10px 15px;">
+                <div class="col-6">ชำระเงิน</div>
+                <div class="col-6">
+                    <div class="input-group">
+                        <input type="number" id="payment" placeholder="" ng-model="payment" value="0" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text">บาท</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 10px 15px 30px">
+                <div class="col-6">เงินทอน</div>
+                <div class="col-6">
+                    <center id="change">0 บาท
+                    </center>
+                </div>
+            </div>
+            </div>
+            <div class="alert-dialog-footer">
+                <ons-alert-dialog-button onclick="hideAlertPayment()" class="button-clancel" style="background: #ff3029;">Cancel</ons-alert-dialog-button>
+                <ons-alert-dialog-button onclick="hideAlertPayment()" class="button-finish">OK</ons-alert-dialog-button>
+            </div>
 
 
+        </ons-alert-dialog>
+
+    </template>
+
+    <script src="./js/UI/controls.js"></script>
 
 
-
-        </script>
-    </div>
-    <div class="navbarBottonTop">
-        <div class="navbarBotton-left">
-            <center>
-                <a class="button navbarBotton-btn" style="margin-top: 6px;">แก้ไข</a>
-            </center>
-        </div>
-
-        <div class="navbarBotton-right">
-            <center>
-                <a class="navbarBottonTop-btn btnPayment button" style="margin-top: 6px;">ชำระเงิน</a>
-            </center>
-        </div>
-    </div>
-    <div class="navbarBotton">
-        <div>
-            <hr>
-        </div>
-        <div class="navbarBotton-left button">
-            <center>
-                <a class="navbarBotton-btn ">ขาย</a>
-            </center>
-        </div>
-
-        <div class="navbarBotton-right">
-            <center>
-                <a class="navbarBotton-btn button">เมนู</a>
-            </center>
-        </div>
-
-    </div>
 </body>
 
 </html>

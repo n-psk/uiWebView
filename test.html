@@ -1,36 +1,325 @@
-<!DOCTYPE html >
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Untitled Page</title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
-    <script type="text/javascript">
-        function TodoCtrl($scope) {
-            $scope.total = function () {
-                return $scope.x - $scope.y;
-            };
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <title>Document</title> -->
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 16px 0px -21px 0px;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .li-left {
+
+            margin-right: 10%;
+            margin-left: 18%;
+            float: left;
+        }
+
+        .li-right {
+            margin-right: 18%;
+            margin-left: 10%;
+            float: right;
+        }
+
+        li a {
+            display: block;
+            color: rgb(27, 27, 27);
+            text-align: center;
+            padding: 13px 16px;
+            text-decoration: none;
+        }
+
+        hr {
+            border-bottom-color: rgb(241, 101, 101)
+        }
+
+        .navbarBotton {
+            overflow: hidden;
+            background-color: rgb(255, 255, 255);
+            position: fixed;
+            bottom: 10px;
+            height: 55px;
+            margin: -10px 0;
+            width: 96%;
+        }
+
+        .navbarBottonTop {
+            overflow: hidden;
+            background-color: rgb(255, 255, 255);
+            position: fixed;
+            bottom: 15px;
+            width: 96%;
+            height: 55px;
+            margin-bottom: 25px
+        }
+
+        .navbarBotton a {
+            display: block;
+            color: #2b2b2b;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+
 
         }
-    </script>
+
+
+        .navbarBottonTop a {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font-size: 20px;
+
+
+        }
+
+        .navbarBottonTop-left {
+            float: left;
+            width: 50%;
+
+        }
+
+        .navbarBottonTop-right {
+            float: right;
+            width: 50%;
+        }
+
+        .navbarBotton-left {
+            float: left;
+            width: 50%;
+
+        }
+
+        .navbarBotton-right {
+            float: right;
+            width: 50%;
+        }
+
+        .navbarBotton-btn {
+            padding: 0% 40%;
+        }
+
+        .navbarBottonTop-btn {
+            padding: 0% 0% 0% 0%;
+            width: 50%;
+        }
+
+        .btnPayment {
+            background-color: brown;
+            color: rgb(218, 218, 218);
+            width: 125px;
+            border-radius: 12px
+        }
+
+        .input-group {
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-align: stretch;
+            -ms-flex-align: stretch;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .input-group-text {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: .375rem .75rem;
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+
+        .form-control {
+            display: block;
+            width: 20px;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .center-from {
+
+            margin: 13% 10%;
+        }
+
+
+
+        .button {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin: 0 auto;
+            font-size: 52px;
+            -webkit-transition: all 0.4s ease-in;
+            transition: all 0.4s ease-in;
+        }
+
+
+
+        .button:before {
+            content: "";
+            background-color: aliceblue;
+            border-radius: 50%;
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            -webkit-transform: scale(0.001, 0.001);
+            transform: scale(0.001, 0.001);
+
+        }
+
+        .button:focus {
+            outline: 0;
+            color: #fff;
+        }
+
+        .button:focus:before {
+            -webkit-animation: effect_dylan 0.8s ease-out;
+            animation: effect_dylan 0.8s ease-out;
+        }
+    </style>
 </head>
 
 <body>
-    <div ng-app>
-        <h2>Calculate</h2>
 
-        <div ng-controller="TodoCtrl">
-            <form>
-                <li>Number 1:
-                    <input type="text" ng-model="x" /> </li>
-                <li>Number 2:
-                    <input type="text" ng-model="y" /> </li>
-                <li>Total
-                    <input type="text" value="{{total()}}" />
-                </li>
-            </form>
+    <ul>
+        <li class="li-left">
+            <center>
+                <h2>0 ชิ้น</h2>
+            </center>
+        </li>
+        <li class="li-right">
+            <center>
+                <h2>0 บาท</h2>
+            </center>
+        </li>
+    </ul>
+
+    <div>
+        <div>
+            <hr>
+        </div>
+        <div style="width: 100%; float: left;">
+            <span style="float: right; margin: -11px 15% -14px">
+                <h3>0 บาท</h3>
+            </span>
         </div>
     </div>
 
+    <div style="width: 100%;">
+        <h2 style="float: left; margin: 0 10%; ">จำนวน</h2>
+        <div style="float: right; margin: 0 10% 0 0;">
+            <div class="input-group">
+                <button class="input-group-text">-</button>
+                <input value="0" type="number" class="form-control">
+                <button class="input-group-text">+</button>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <device type="media" onchange="update(this.data)"></device>
+        <video autoplay style="width: 100%;  margin: auto; padding: 40px 0% 0% ;" ></video>
+        <script>
+            function update(stream) {
+                document.querySelector('video').src = stream.url;
+            }
+            function hasGetUserMedia() {
+                return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+            }
+
+            if (hasGetUserMedia()) {
+                // Good to go!
+            } else {
+                alert('getUserMedia() is not supported by your browser');
+            }
+            const constraints = {
+                video: true
+            };
+
+            const video = document.querySelector('video');
+
+            function handleSuccess(stream) {
+                video.srcObject = stream;
+            }
+
+            function handleError(error) {
+                console.error('Reeeejected!', error);
+            }
+            var hdConstraints = {
+                video: { width: { min: 1280 }, height: { min: 720 } }
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints).
+                then(handleSuccess).catch(handleError);
+
+
+
+
+
+        </script>
+    </div>
+    <div class="navbarBottonTop">
+        <div class="navbarBotton-left">
+            <center>
+                <a class="button navbarBotton-btn" style="margin-top: 6px;">แก้ไข</a>
+            </center>
+        </div>
+
+        <div class="navbarBotton-right">
+            <center>
+                <a class="navbarBottonTop-btn btnPayment button" style="margin-top: 6px;">ชำระเงิน</a>
+            </center>
+        </div>
+    </div>
+    <div class="navbarBotton">
+        <div>
+            <hr>
+        </div>
+        <div class="navbarBotton-left button">
+            <center>
+                <a class="navbarBotton-btn ">ขาย</a>
+            </center>
+        </div>
+
+        <div class="navbarBotton-right">
+            <center>
+                <a class="navbarBotton-btn button">เมนู</a>
+            </center>
+        </div>
+
+    </div>
 </body>
 
 </html>
