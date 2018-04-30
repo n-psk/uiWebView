@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -61,7 +62,6 @@
 
                 <section id="container" class="container">
                     <div class="controls">
-                        <h3>Scan various barcodes continously</h3>
                         <button type="button" class="icon-barcode button scan">Start Scanning</button>
                         <div class="readers">
                             <label>
@@ -93,9 +93,7 @@
                                 <input type="checkbox" name="i2of5_reader" />
                             </label>
                         </div>
-                        <p>
-                            Be aware that not all combinations play together nicely. Some codes do not have a checksum (e.g. ITF).
-                        </p>
+                       
                     </div>
                     <div class="overlay overlay--inline">
                         <div class="overlay__content">
@@ -108,7 +106,7 @@
                         </div>
                     </div>
                 </section>
-                <ul class="results"></ul>
+                <ul class="results" style="position: absolute;"></ul>
                 </section>
                 <script src="./js/camera/index.js"></script>
                 <!-- <script src="./js/camera/live_w_locator.js"></script> -->
