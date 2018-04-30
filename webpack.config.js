@@ -24,7 +24,7 @@ module.exports = {
     output: {
         path: __dirname + '/library/quaagaJS/dist',
         publicPath: '/',
-        filename: 'quagga.js',
+        filename: 'quagga.js'
     },
     devServer: {
         contentBase: './',
