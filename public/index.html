@@ -74,7 +74,7 @@
                     <div class="controls">
 
 
-                        <label style="position:  absolute;left: 10px; z-index: 1">
+                        <!-- <label style="position:  absolute;left: 10px; z-index: 1">
 
                             <select name="decoder_readers">
                                 <option value="code_128" selected="selected">Code 128</option>
@@ -90,12 +90,12 @@
                                 <option value="2of5">Standard 2 of 5</option>
                                 <option value="code_93">Code 93</option>
                             </select>
-                        </label>
-                        <label style="position:  absolute;right: 0;margin-right: 12px; z-index: 1">
+                        </label> -->
+                        <!-- <label style="position:  absolute;right: 0;margin-right: 12px; z-index: 1">
 
                             <select name="input-stream_constraints" id="deviceSelection" style="width: 65px;">
                             </select>
-                        </label>
+                        </label> -->
                         <label style="display: none">
                                 <span>Torch</span>
                                 <input type="checkbox" name="settings_torch" />
@@ -105,7 +105,7 @@
                     
                     <div id="interactive" class="viewport">
                         
-                            <video style="width: 110%; "></video>
+                            <video style="width: 110%; position: absolute; z-index: -2;"></video>
                             <canvas class="drawingBuffer" style="position: absolute; width: 110%; z-index: 0"></canvas>
                         
                     </div>

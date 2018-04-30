@@ -209,7 +209,8 @@ $(function() {
                 return parseInt(value);
             },
             decoder: {
-                readers: function(value) {
+                readers:
+                 function(value) {
                     if (value === 'ean_extended') {
                         return [{
                             format: "ean_reader",
@@ -244,10 +245,12 @@ $(function() {
             numOfWorkers: 2,
             frequency: 10,
             decoder: {
-                readers : [{
-                    format: "ean_reader",
-                    config: {}
-                }]
+                readers : [ 'ean_reader','ean_8_reader','code_39_reader','code_39_vin_reader','codabar_reader','upc_reader','upc_e_reader'
+                //     {
+                //     format: "ean_reader",
+                //     config: {}
+                // }
+            ]
             },
             locate: true
         },
@@ -287,7 +290,7 @@ $(function() {
             App.lastResult = code;
             var $node = null, canvas = Quagga.canvas.dom.image;
 
-            $node = $('<li><div class="thumbnail"><div class="caption"><center><p class="code"></p></center></div></div></li>');
+            $node = $('<li><div class="thumbnail"><div class="caption"><center><p class="code" style="color: red;"></p></center></div></div></li>');
             // $node.find("img").attr("src", canvas.toDataURL());
             $node.find("p.code").html(code);
             $("#result_strip ul.thumbnails").prepend($node);

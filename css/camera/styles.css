@@ -140,7 +140,7 @@ input[type=file] {
 #result_strip > ul > li .thumbnail {
   padding: 15px 0px 0px;
   margin: 4px;
-  border: 1px dashed #CCC;
+  /* border: 1px dashed #CCC; */
 }
 /* line 68, ../sass/_viewport.scss */
 #result_strip > ul > li .thumbnail img {
