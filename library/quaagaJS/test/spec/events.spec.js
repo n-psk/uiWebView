@@ -1,10 +1,11 @@
-import createEventedElement from '../../src/common/events';
+import Events from '../../src/common/events';
 
-let Events;
 beforeEach(function() {
-    Events = createEventedElement();
+    Events.unsubscribe();
 });
 describe("subscribe", function() {
+
+
     it("should call one callback for a single event", function() {
         var callbackA = sinon.stub(),
             callbackB = sinon.stub();
@@ -30,16 +31,18 @@ describe("subscribe", function() {
 
     it("should call the callback asynchronuously", function(done) {
         var test = {
-            callback: function() {}
-        };
+                callback: function() {
+
+                }
+            };
 
         sinon.stub(test, "callback", function() {
-            expect(test.callback.calledOnce).to.equal(true);
+            expect(test.callback.calledOnce).to.be.true;
             done();
         });
         Events.subscribe("test", test.callback, true);
         Events.publish("test");
-        expect(test.callback.called).to.equal(false);
+        expect(test.callback.called).to.be.false;
     });
 });
 

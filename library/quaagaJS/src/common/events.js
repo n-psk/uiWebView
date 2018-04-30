@@ -1,4 +1,4 @@
-export default function createEventedElement() {
+export default (function() {
     var events = {};
 
     function getEvent(eventName) {
@@ -91,4 +91,4 @@ export default function createEventedElement() {
             }
         }
     };
-};
+})();

@@ -5,7 +5,8 @@ var canvasMock,
     imageSize,
     config;
 
-describe("ResultCollector", () => {
+
+describe("resultCollector", () => {
     beforeEach(function() {
         imageSize = {x: 320, y: 240};
         config = {
@@ -102,4 +103,4 @@ describe("ResultCollector", () => {
             expect(collector.getResults()).to.have.length(1);
         });
     });
-});
+})

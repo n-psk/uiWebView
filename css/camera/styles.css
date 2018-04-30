@@ -116,8 +116,8 @@ input[type=file] {
 /* line 44, ../sass/_viewport.scss */
 #result_strip {
   margin: 10px 0;
-  border-top: 1px solid #EEE;
-  border-bottom: 1px solid #EEE;
+  /* border-top: 1px solid #EEE; */
+  /* border-bottom: 1px solid #EEE; */
   padding: 10px 0;
 }
 /* line 50, ../sass/_viewport.scss */
@@ -138,7 +138,7 @@ input[type=file] {
 }
 /* line 63, ../sass/_viewport.scss */
 #result_strip > ul > li .thumbnail {
-  padding: 5px;
+  padding: 15px 0px 0px;
   margin: 4px;
   border: 1px dashed #CCC;
 }
@@ -248,7 +248,8 @@ footer {
 .container {
   margin: 20px auto;
   padding: 10px;
-  max-width: 640px;
+  /* max-width: 640px; */
+  width: 1000%;
 }
 
 #interactive.viewport {
@@ -256,8 +257,8 @@ footer {
 }
 
 #interactive.viewport > canvas, #interactive.viewport > video {
-    max-width: 100%;
-    width: 100%;
+    /* max-width: 100%; */
+    /* width: 100%; */
 }
 
 canvas.drawing {

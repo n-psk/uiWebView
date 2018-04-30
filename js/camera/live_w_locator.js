@@ -1,39 +1,39 @@
 $(function() {
-    // var resultCollector = Quagga.ResultCollector.create({
-    //     capture: true,
-    //     capacity: 20,
-    //     blacklist: [{
-    //         code: "WIWV8ETQZ1", format: "code_93"
-    //     }, {
-    //         code: "EH3C-%GU23RK3", format: "code_93"
-    //     }, {
-    //         code: "O308SIHQOXN5SA/PJ", format: "code_93"
-    //     }, {
-    //         code: "DG7Q$TV8JQ/EN", format: "code_93"
-    //     }, {
-    //         code: "VOFD1DB5A.1F6QU", format: "code_93"
-    //     }, {
-    //         code: "4SO64P4X8 U4YUU1T-", format: "code_93"
-    //     }],
-    //     filter: function(codeResult) {
-    //         // only store results which match this constraint
-    //         // e.g.: codeResult
-    //         return true;
-    //     }
-    // });
+    var resultCollector = Quagga.ResultCollector.create({
+        capture: true,
+        capacity: 20,
+        blacklist: [{
+            code: "WIWV8ETQZ1", format: "code_93"
+        }, {
+            code: "EH3C-%GU23RK3", format: "code_93"
+        }, {
+            code: "O308SIHQOXN5SA/PJ", format: "code_93"
+        }, {
+            code: "DG7Q$TV8JQ/EN", format: "code_93"
+        }, {
+            code: "VOFD1DB5A.1F6QU", format: "code_93"
+        }, {
+            code: "4SO64P4X8 U4YUU1T-", format: "code_93"
+        }],
+        filter: function(codeResult) {
+            // only store results which match this constraint
+            // e.g.: codeResult
+            return true;
+        }
+    });
     var App = {
         init: function() {
             var self = this;
 
-            // Quagga.init(this.state, function(err) {
-            //     if (err) {
-            //         return self.handleError(err);
-            //     }
-            //     //Quagga.registerResultCollector(resultCollector);
-            //     App.attachListeners();
-            //     App.checkCapabilities();
-            //     Quagga.start();
-            // });
+            Quagga.init(this.state, function(err) {
+                if (err) {
+                    return self.handleError(err);
+                }
+                //Quagga.registerResultCollector(resultCollector);
+                App.attachListeners();
+                App.checkCapabilities();
+                Quagga.start();
+            });
         },
         handleError: function(err) {
             console.log(err);
@@ -44,7 +44,7 @@ $(function() {
             if (typeof track.getCapabilities === 'function') {
                 capabilities = track.getCapabilities();
             }
-            this.applySettingsVisibility('zoom', capabilities.zoom);
+            // this.applySettingsVisibility('zoom', capabilities.zoom);
             this.applySettingsVisibility('torch', capabilities.torch);
         },
         updateOptionsForMediaRange: function(node, range) {
@@ -124,43 +124,43 @@ $(function() {
                 self.setState(state, value);
             });
         },
-        // _printCollectedResults: function() {
-        //     var results = resultCollector.getResults(),
-        //         $ul = $("#result_strip ul.collector");
+        _printCollectedResults: function() {
+            var results = resultCollector.getResults(),
+                $ul = $("#result_strip ul.collector");
 
-        //     results.forEach(function(result) {
-        //         var $li = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
+            results.forEach(function(result) {
+                var $li = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
 
-        //         $li.find("img").attr("src", result.frame);
-        //         $li.find("h4.code").html(result.codeResult.code + " (" + result.codeResult.format + ")");
-        //         $ul.prepend($li);
-        //     });
-        // },
-        // _accessByPath: function(obj, path, val) {
-        //     var parts = path.split('.'),
-        //         depth = parts.length,
-        //         setter = (typeof val !== "undefined") ? true : false;
+                $li.find("img").attr("src", result.frame);
+                $li.find("h4.code").html(result.codeResult.code + " (" + result.codeResult.format + ")");
+                $ul.prepend($li);
+            });
+        },
+        _accessByPath: function(obj, path, val) {
+            var parts = path.split('.'),
+                depth = parts.length,
+                setter = (typeof val !== "undefined") ? true : false;
 
-        //     return parts.reduce(function(o, key, i) {
-        //         if (setter && (i + 1) === depth) {
-        //             if (typeof o[key] === "object" && typeof val === "object") {
-        //                 Object.assign(o[key], val);
-        //             } else {
-        //                 o[key] = val;
-        //             }
-        //         }
-        //         return key in o ? o[key] : {};
-        //     }, obj);
-        // },
-        // _convertNameToState: function(name) {
-        //     return name.replace("_", ".").split("-").reduce(function(result, value) {
-        //         return result + value.charAt(0).toUpperCase() + value.substring(1);
-        //     });
-        // },
-        // detachListeners: function() {
-        //     $(".controls").off("click", "button.stop");
-        //     $(".controls .reader-config-group").off("change", "input, select");
-        // },
+            return parts.reduce(function(o, key, i) {
+                if (setter && (i + 1) === depth) {
+                    if (typeof o[key] === "object" && typeof val === "object") {
+                        Object.assign(o[key], val);
+                    } else {
+                        o[key] = val;
+                    }
+                }
+                return key in o ? o[key] : {};
+            }, obj);
+        },
+        _convertNameToState: function(name) {
+            return name.replace("_", ".").split("-").reduce(function(result, value) {
+                return result + value.charAt(0).toUpperCase() + value.substring(1);
+            });
+        },
+        detachListeners: function() {
+            $(".controls").off("click", "button.stop");
+            $(".controls .reader-config-group").off("change", "input, select");
+        },
         applySetting: function(setting, value) {
             var track = Quagga.CameraAccess.getActiveTrack();
             if (track && typeof track.getCapabilities === 'function') {
@@ -245,7 +245,7 @@ $(function() {
             frequency: 10,
             decoder: {
                 readers : [{
-                    format: "code_128_reader",
+                    format: "ean_reader",
                     config: {}
                 }]
             },
@@ -256,42 +256,42 @@ $(function() {
 
     App.init();
 
-    // Quagga.onProcessed(function(result) {
-    //     var drawingCtx = Quagga.canvas.ctx.overlay,
-    //         drawingCanvas = Quagga.canvas.dom.overlay;
+    Quagga.onProcessed(function(result) {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+            drawingCanvas = Quagga.canvas.dom.overlay;
 
-    //     if (result) {
-    //         if (result.boxes) {
-    //             drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-    //             result.boxes.filter(function (box) {
-    //                 return box !== result.box;
-    //             }).forEach(function (box) {
-    //                 Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
-    //             });
-    //         }
+        if (result) {
+            if (result.boxes) {
+                drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+                result.boxes.filter(function (box) {
+                    return box !== result.box;
+                }).forEach(function (box) {
+                    Quagga.ImageDebug.drawPath(box, {x: 0, y: 1}, drawingCtx, {color: "green", lineWidth: 2});
+                });
+            }
 
-    //         if (result.box) {
-    //             Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: "#00F", lineWidth: 2});
-    //         }
+            if (result.box) {
+                Quagga.ImageDebug.drawPath(result.box, {x: 0, y: 1}, drawingCtx, {color: "#00F", lineWidth: 2});
+            }
 
-    //         if (result.codeResult && result.codeResult.code) {
-    //             Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
-    //         }
-    //     }
-    // });
+            if (result.codeResult && result.codeResult.code) {
+                Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, drawingCtx, {color: 'red', lineWidth: 3});
+            }
+        }
+    });
 
-    // Quagga.onDetected(function(result) {
-    //     var code = result.codeResult.code;
+    Quagga.onDetected(function(result) {
+        var code = result.codeResult.code;
 
-    //     if (App.lastResult !== code) {
-    //         App.lastResult = code;
-    //         var $node = null, canvas = Quagga.canvas.dom.image;
+        if (App.lastResult !== code) {
+            App.lastResult = code;
+            var $node = null, canvas = Quagga.canvas.dom.image;
 
-    //         $node = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
-    //         $node.find("img").attr("src", canvas.toDataURL());
-    //         $node.find("h4.code").html(code);
-    //         $("#result_strip ul.thumbnails").prepend($node);
-    //     }
-    // });
+            $node = $('<li><div class="thumbnail"><div class="caption"><center><p class="code"></p></center></div></div></li>');
+            // $node.find("img").attr("src", canvas.toDataURL());
+            $node.find("p.code").html(code);
+            $("#result_strip ul.thumbnails").prepend($node);
+        }
+    });
 
 });

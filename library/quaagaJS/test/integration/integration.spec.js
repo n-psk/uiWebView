@@ -45,16 +45,12 @@ describe('decodeSingle', function () {
             async.eachSeries(testSet, function (sample, callback) {
                 config.src = folder + sample.name;
                 config.readers = readers;
-                Quagga
-                    .config(config)
-                    .fromSource(config.src)
-                    .addEventListener('processed', function(result){
-                        console.log(sample.name);
-                        expect(result.codeResult.code).to.equal(sample.result);
-                        expect(result.codeResult.format).to.equal(sample.format);
-                        callback();
-                    })
-                    .start();
+                Quagga.decodeSingle(config, function(result) {
+                    console.log(sample.name);
+                    expect(result.codeResult.code).to.equal(sample.result);
+                    expect(result.codeResult.format).to.equal(sample.format);
+                    callback();
+                });
             }, function() {
                 done();
             });
@@ -173,7 +169,7 @@ describe('decodeSingle', function () {
                 {"name": "image-004.jpg", "result": "QUAGGAJS"},
                 /* {"name": "image-005.jpg", "result": "CODE39"}, */
                 {"name": "image-006.jpg", "result": "2/4-8/16-32"},
-                /* {"name": "image-007.jpg", "result": "2/4-8/16-32"}, */
+                {"name": "image-007.jpg", "result": "2/4-8/16-32"},
                 {"name": "image-008.jpg", "result": "CODE39"},
                 {"name": "image-009.jpg", "result": "2/4-8/16-32"},
                 {"name": "image-010.jpg", "result": "CODE39"}
@@ -194,9 +190,9 @@ describe('decodeSingle', function () {
                 {"name": "image-002.jpg", "result": "42191605"},
                 {"name": "image-003.jpg", "result": "90311208"},
                 {"name": "image-004.jpg", "result": "24057257"},
-                //{"name": "image-005.jpg", "result": "90162602"},
+                {"name": "image-005.jpg", "result": "90162602"},
                 //{"name": "image-006.jpg", "result": "24036153"},
-                //{"name": "image-007.jpg", "result": "42176817"},
+                {"name": "image-007.jpg", "result": "42176817"},
                 {"name": "image-008.jpg", "result": "42191605"},
                 {"name": "image-009.jpg", "result": "42242215"},
                 {"name": "image-010.jpg", "result": "42184799"}
@@ -236,11 +232,11 @@ describe('decodeSingle', function () {
     describe("UPC-E", function() {
         var config = generateConfig(),
             testSet = [
-                //{"name": "image-001.jpg", "result": "04965802"},
+                {"name": "image-001.jpg", "result": "04965802"},
                 {"name": "image-002.jpg", "result": "04965802"},
                 {"name": "image-003.jpg", "result": "03897425"},
                 {"name": "image-004.jpg", "result": "05096893"},
-                //{"name": "image-005.jpg", "result": "05096893"},
+                {"name": "image-005.jpg", "result": "05096893"},
                 {"name": "image-006.jpg", "result": "05096893"},
                 {"name": "image-007.jpg", "result": "03897425"},
                 {"name": "image-008.jpg", "result": "01264904"},
@@ -268,7 +264,7 @@ describe('decodeSingle', function () {
                 {"name": "image-007.jpg", "result": "C$399.95A"},
                 //{"name": "image-008.jpg", "result": "A16:9/4:3/3:2D"},
                 {"name": "image-009.jpg", "result": "C$399.95A"},
-                //{"name": "image-010.jpg", "result": "C$399.95A"}
+                {"name": "image-010.jpg", "result": "C$399.95A"}
             ];
 
         testSet.forEach(function(sample) {
@@ -306,6 +302,80 @@ describe('decodeSingle', function () {
         testSet.forEach(function(sample) {
             sample.format = "i2of5";
         });
+        _runTestSet(testSet, config);
+    });
+
+    describe("2of5", function() {
+        var config = config = {
+                inputStream: {
+                    size: 800,
+                    singleChannel: false
+                },
+                locator: {
+                    patchSize: "medium",
+                    halfSample: true
+                },
+                numOfWorkers: 0,
+                decoder: {
+                    readers: ["2of5_reader"]
+                },
+                locate: true,
+                src: null
+            },
+            testSet = [
+                {"name": "image-001.jpg", "result": "9577149002"},
+                {"name": "image-002.jpg", "result": "9577149002"},
+                {"name": "image-003.jpg", "result": "5776158811"},
+                {"name": "image-004.jpg", "result": "0463381455"},
+                {"name": "image-005.jpg", "result": "3261594101"},
+                {"name": "image-006.jpg", "result": "3261594101"},
+                {"name": "image-007.jpg", "result": "3261594101"},
+                {"name": "image-008.jpg", "result": "6730705801"},
+                {"name": "image-009.jpg", "result": "5776158811"},
+                {"name": "image-010.jpg", "result": "5776158811"}
+            ];
+
+        testSet.forEach(function(sample) {
+            sample.format = "2of5";
+        });
+
+        _runTestSet(testSet, config);
+    });
+
+    describe("code_93", function() {
+        var config = config = {
+                inputStream: {
+                    size: 800,
+                    singleChannel: false
+                },
+                locator: {
+                    patchSize: "large",
+                    halfSample: true
+                },
+                numOfWorkers: 0,
+                decoder: {
+                    readers: ["code_93_reader"]
+                },
+                locate: true,
+                src: null
+            },
+            testSet = [
+                {"name": "image-001.jpg", "result": "WIWV8ETQZ1"},
+                {"name": "image-002.jpg", "result": "EH3C-%GU23RK3"},
+                {"name": "image-003.jpg", "result": "O308SIHQOXN5SA/PJ"},
+                {"name": "image-004.jpg", "result": "DG7Q$TV8JQ/EN"},
+                {"name": "image-005.jpg", "result": "DG7Q$TV8JQ/EN"},
+                {"name": "image-006.jpg", "result": "O308SIHQOXN5SA/PJ"},
+                {"name": "image-007.jpg", "result": "VOFD1DB5A.1F6QU"},
+                {"name": "image-008.jpg", "result": "WIWV8ETQZ1"},
+                {"name": "image-009.jpg", "result": "4SO64P4X8 U4YUU1T-"},
+                {"name": "image-010.jpg", "result": "4SO64P4X8 U4YUU1T-"}
+            ];
+
+        testSet.forEach(function(sample) {
+            sample.format = "code_93";
+        });
+
         _runTestSet(testSet, config);
     });
 });
